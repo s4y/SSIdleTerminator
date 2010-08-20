@@ -4,7 +4,7 @@ launchd, built into the Mac OS, can start daemons automatically under [a number 
 
 `SSIdleTerminator` is a simple Objective-C class that your daemon indicate when it's busy, and kills it when it's not.
 
-# How do I use `SSIdleTerminator`?
+# How do I use it?
 
 When your daemon starts an activity, let SSIdleTerminator know:
 
