@@ -1,0 +1,29 @@
+# What is this?
+
+launchd, built into the Mac OS, can start daemons automatically under [a number of conditions](http://developer.apple.com/mac/library/technotes/tn2005/tn2083.html#SECLAUNCHINGONDEMAND). Apple considers it best practice for [launchd](http://developer.apple.com/macosx/launchd.html)-managed [daemons and agents](http://developer.apple.com/mac/library/technotes/tn2005/tn2083.html) to exit when not busy, but leaves it up to developers to make it happen.
+
+`SSIdleTerminator` is a simple Objective-C class that your daemon indicate when it's busy, and kills it when it's not.
+
+# How do I use `SSIdleTerminator`?
+
+When your daemon starts an activity, let SSIdleTerminator know:
+
+   [[SSIdleTerminator idleTerminator] becomeActive];
+
+This increments an internal counter, much like the [sudden termination API](http://developer.apple.com/mac/library/documentation/cocoa/reference/foundation/Classes/NSProcessInfo_Class/Reference/Reference.html#//apple_ref/doc/uid/20000316-SW3) in Mac OS 10.6.
+
+When you finish an activity, call
+
+    [[SSIdleTerminator idleTerminator] becomeIdle];
+
+When the calls to `-becomeActive` and `-becomeIdle` are balanced, your process is terminated after the timeout.
+
+You must set a timeout before `SSIdleTerminator` will operate:
+
+    [[SSIdleTerminator idleTerminator] setTimeout:30];
+
+You can make this up, or, if you're checking in with launchd, look up the `LAUNCH_JOBKEY_TIMEOUT` value from the checkin response dictionary.
+
+# I have a question!
+
+Send me a message, or create an issue.
