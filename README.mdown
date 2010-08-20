@@ -8,7 +8,7 @@ launchd, built into the Mac OS, can start daemons automatically under [a number 
 
 When your daemon starts an activity, let SSIdleTerminator know:
 
-   [[SSIdleTerminator idleTerminator] becomeActive];
+    [[SSIdleTerminator idleTerminator] becomeActive];
 
 This increments an internal counter, much like the [sudden termination API](http://developer.apple.com/mac/library/documentation/cocoa/reference/foundation/Classes/NSProcessInfo_Class/Reference/Reference.html#//apple_ref/doc/uid/20000316-SW3) in Mac OS 10.6.
 
